@@ -1,10 +1,8 @@
 package com.ipi.jva324;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ipi.jva324.commande.model.Commande;
 import com.ipi.jva324.stock.model.ProduitEnStock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
@@ -17,10 +15,10 @@ import java.util.Arrays;
 import java.util.Collections;
 
 @SpringBootApplication
-public class Jva324Application {
+public class StockApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Jva324Application.class, args);
+		SpringApplication.run(StockApplication.class, args);
 	}
 
 	/**
@@ -40,7 +38,7 @@ public class Jva324Application {
 	@Bean
 	public RepositoryRestConfigurer repositoryRestConfigurer() {
 		return RepositoryRestConfigurer.withConfig(config -> {
-			config.exposeIdsFor(Commande.class,ProduitEnStock.class);
+			config.exposeIdsFor(ProduitEnStock.class);
 		});
 	}
 

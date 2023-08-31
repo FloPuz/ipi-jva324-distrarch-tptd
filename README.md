@@ -95,7 +95,7 @@ Configurer l'application pour s'en servir : dans ```main/resources/application.p
 
 D'abord (et après tout changement d'interface utilisateur React.js) lancer une compilation complète : ```mvn clean install-DskipTests```
 
-lancer la classe com.ipi.jva324.Jva324Application
+lancer la classe com.ipi.jva324.StockApplication
 - dans l'IDE
     - IntelliJ : l'ouvrir et cliquer sur la flèche verte sur sa gauche
     - Eclipse : clic droit > Run as application),
@@ -175,14 +175,26 @@ TODO NON [TD] (à ne faire que s'il n'existe pas encore) Copiez le module Maven 
 - Supprimez du module stock tout le code Java de la partie commande, et renommez et déplacez la classe de démarrage Spring Boot en com.ipi.jva324.stock.StockApplication. Vérifiez que le nouveau test unitaire marche toujours.
 - Lancez le microservice Stock ainsi créé à l'aide de cette classe. Dans l'IHM qu'il sert, qu'est-ce qui marche encore et qu'est-ce qui ne marche plus, pourquoi ? Quelle est la solution classique, du point de vue web (C) ? du point de vue micro-services (G) ?
 
+Réponse : une fois l'application run, toutes la parties lié aux commandes ne fonctionnent plus,
+il faudrait exposer les api rest auprès des deux micro service, nniveau web suffirait de renseigné en dur l'url de requête pour l'appel REST
+
+
+
 NB. En temps normal, chaque microservice serait dans son propre repository Github vu qu'il est géré par une équipe de développement différente (à moins d'une politique "monorepo" dans l'entreprise). Tous sont ici dans le même repository (et de builds raccrochés dans un pom.xml racine) uniquement pour simplifier la gestion des exercices.
 
 [TD] Essayez de démarrer les 2 microservices en même temps, que constatez-vous ? Quelle est la cause, le principe de la solution, une solution qui entre autres utilise ce qui a été fait plus tôt ? Mettez-là en place. Validez que l'IHM remarche intégralement.
+J'ai démarrer les 2 micro service après avoir changer les ports de chacun 
+Mais IHM toujours pas bonne, 
+je ne comprends pas pourquoi je ne vais pas taper sur le 8080/commandes plutot que le 8081/commandes
+Pour moi il faut soit, renseingé les url en dur dans ce cas là afin de tester
+mais dans tout les cas mon node commandes ne connait rien de mon node stock 
 
-[TP] StockApi :
- - Sur le modèle de CommandeApi dans le module maven "commande"", développer dans le modèle maven "stock" une StockApi et son traitement d'un GET HTTP renvoyant un ProduitEnStock d'id donné.
+[TP] StockApi : ToDO On veut que si les 2 noeuds soient démarré en même temps tout fonctionne
+mais si stock stopped, on peut plus crée de commande
+- Sur le modèle de CommandeApi dans le module maven "commande"", développer dans le modèle maven "stock" une StockApi et son traitement d'un GET HTTP renvoyant un ProduitEnStock d'id donné.
 - Ensuite, sur le modèle de CommandeProduitServiceRestHalImpl, développer CommandeProduitServiceRestImpl qui appelle cette nouvelle StockApi et non plus l'API automatiquement exposée au format REST HAL par Spring Data Rest.
 - Faites-en un test d'intégration CommandeProduitServiceRestImplIntegrationTest sur le modèle de celui fait en TD dans CommandeProduitServiceRestHalImplIntegrationTest. Utilisez la même solution (@Import(TestRestConfiguration)) pour le faire marcher en parallèle des autres.
+
 
 [TD] BONUS si vous êtes en avance, adaptez l'IHM de stock pour qu'elle s'en serve, voire commencez à développer une version Thymeleaf de l'IHM (par exemple une simple liste de produits).
 

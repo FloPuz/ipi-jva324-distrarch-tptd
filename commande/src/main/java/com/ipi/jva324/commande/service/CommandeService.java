@@ -7,6 +7,7 @@ import com.ipi.jva324.stock.service.ProduitService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.context.WebServerInitializedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service("test")
 public class CommandeService {
 
     protected Logger logger = LoggerFactory.getLogger(CommandeService.class);
@@ -30,6 +31,10 @@ public class CommandeService {
 
     @Autowired
     private ProduitService produitService;
+
+    @Autowired
+    @Qualifier("commandeProduitServiceLocalImpl")
+    private CommandeProduitService commandeProduitService;
 
     /**
      * TODO better
@@ -57,7 +62,7 @@ public class CommandeService {
 
         // TODO get quantiteStockConnu, d'abord par RestTemplate
         logger.debug("createCommande produitId=" + commande.getProduitId());
-        ProduitEnStock produitEnStockFound = produitService.getProduit(commande.getProduitId());
+        ProduitEnStock produitEnStockFound = commandeProduitService.getProduit(commande.getProduitId());
         long quantiteDisponible = (produitEnStockFound == null) ? 0 : produitEnStockFound.getQuantiteDisponible();
         commande.setQuantiteDisponibleStockConnu(quantiteDisponible);
 

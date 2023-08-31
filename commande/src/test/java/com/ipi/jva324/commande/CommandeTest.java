@@ -3,6 +3,7 @@ package com.ipi.jva324.commande;
 import com.ipi.jva324.Jva324Application;
 import com.ipi.jva324.commande.model.Commande;
 import com.ipi.jva324.commande.service.CommandeInvalideException;
+import com.ipi.jva324.commande.service.CommandeProduitServiceRestImpl;
 import com.ipi.jva324.commande.service.CommandeService;
 import com.ipi.jva324.commande.service.StockInsuffisantCommandeException;
 import com.ipi.jva324.stock.model.ProduitEnStock;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
@@ -36,6 +38,9 @@ public class CommandeTest {
     /** aide pour les tests */
     @Autowired
     private ProduitService produitService;
+
+    @Autowired
+    private CommandeProduitServiceRestImpl commandeProduitServiceRest;
 
     @BeforeEach
     void setUp() {
@@ -76,5 +81,15 @@ public class CommandeTest {
             Assertions.assertEquals(true, e.getMessage().contains("insuffisant"));
         }
     }
-
+    @Test
+    public void remoteCallGetProduitById() throws StockInsuffisantCommandeException {
+        try {
+            ProduitEnStock p = new ProduitEnStock("test","toto",10l);
+            p.setId(100l);
+            commandeProduitServiceRest.getProduit(100l);
+            Assertions.assertEquals(p.getNom(),"test");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }
