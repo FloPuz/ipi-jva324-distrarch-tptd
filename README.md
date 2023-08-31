@@ -206,6 +206,9 @@ TODO cours test API REST locale / fournie
 
 [TD] générez la base d'un nouveau microservice Spring Boot à l'aide de start.spring.io (Spring Initializr), avec une configuration similaire à celle du module "commande", mais nommé "discovery" et de dépendances : cloud-eureka-server. Configurez ses propriétés comme pour un DiscoveryService. Démarrez-le en même temps que les précédents microservices et vérifiez que les logs de non-enregistrement de ces derniers disparaissent.
 
+Mon eureka recense bien mes deux micro service sur le port défini pour eureka par contre c'est tout ce qu'il fait  
+
+
 TODO s'assurer qu'il est utilisé dans RestTemplate : https://spring.io/blog/2015/01/20/microservice-registration-and-discovery-with-spring-cloud-and-netflix-s-eureka
 & passage à l'échelle en en instanciant d'autres instances, manuellement et aussi avec docker-compose scale
 
