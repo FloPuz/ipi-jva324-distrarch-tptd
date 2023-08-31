@@ -17,10 +17,9 @@
 	</properties>
 
 	<modules>
-		<!-- module>discovery</module -->
+		<module>discovery</module>
 		<module>commande</module>
 		<module>stock</module>
-        <module>discovery</module>
         <!-- <module>gateway</module -->
 	</modules>
 

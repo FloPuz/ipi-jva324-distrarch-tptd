@@ -42,10 +42,10 @@
 		<!-- eureka Discovery Service client
 		for all nodes (except Discovery Service)
 		NB. replaces spring-cloud-starter-eureka -->
-		<!-- dependency>
+		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency -->
+		</dependency>
 		<!-- actuator (for admin ex. UI) -->
 		<!-- dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -85,6 +85,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
